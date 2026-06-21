@@ -1,0 +1,47 @@
+<!DOCTYPE HTML5>
+<html>
+    <head>
+        <title> myTodo List</title>
+        <link rel="shortcut icon" href="https://e7.pngegg.com/pngimages/435/425/png-clipart-logo-circle-brand-font-circle-angle-text-thumbnail.png" type="image/x-icon">
+        <style>
+           
+        </style>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    </head>
+    <body class="container">
+        <h2 class="text-center">My ToDo List</h2>
+       
+            <form action="/add" method="POST" class="container text-center">
+                <input type="text" name="task" placeholder="Enter your Task" class="rounded p-2" required>
+                <button type="submit" class="btn btn-outline-success"> ➕Add Task</button>
+            </form>
+           
+            <hr>
+
+
+
+
+            <h3 class="text-left">My Tasks</h3>
+            {% if tasks %}
+                <div class="container p-3">
+                    {% for task in tasks %}
+                        <div class="task-items">
+                            <form action="/update/{{ task[0] }}" method="POST">
+                                <input type="text" name="new-task" value="{{ task[1] }}" class="rounded p-2"  required>
+                                <button type="submit" class="btn btn-primary text-white p-2"> ♾️Update Task</button>
+                                 <a href="/delete/{{ task[0] }}" class="btn btn-danger text-white p-2" onclick="return confirm('Are your sure want to delete this?')">🗑️delete</a>
+                           
+                            </form>
+                            <div class="actions">
+                                </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No tasks yet, Add a task above! </p>
+            {% endif %}
+
+
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</html>
